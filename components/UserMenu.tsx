@@ -10,9 +10,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 import { useAuthActions } from "@convex-dev/auth/react";
 import { PersonIcon } from "@radix-ui/react-icons";
 import { ReactNode } from "react";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function UserMenu({ children }: { children: ReactNode }) {
   return (
@@ -31,6 +33,10 @@ export function UserMenu({ children }: { children: ReactNode }) {
           <DropdownMenuLabel className="flex items-center gap-2 py-0 font-normal">
             Theme
             <ThemeToggle />
+          </DropdownMenuLabel>
+          <DropdownMenuLabel className="flex items-center gap-2 py-2 font-normal">
+            Language
+            <LanguageSwitcher />
           </DropdownMenuLabel>
           <SignOutButton />
         </DropdownMenuContent>

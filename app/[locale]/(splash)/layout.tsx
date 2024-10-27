@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ReactNode } from "react";
+import { Header } from "./GetStarted/header";
 
 export default function SplashPageLayout({
   children,
@@ -9,7 +10,7 @@ export default function SplashPageLayout({
 }) {
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <header className="sticky top-0 z-10 flex h-20 border-b bg-background/80 px-4 backdrop-blur md:px-6">
+      {/* <header className="sticky top-0 z-10 flex h-20 border-b bg-background/80 px-4 backdrop-blur md:px-6">
         <nav className="container hidden w-full justify-between gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
           <Link href="/">
             <h1 className="text-base font-semibold">Next.js Template</h1>
@@ -18,7 +19,8 @@ export default function SplashPageLayout({
             <SplashPageNav />
           </div>
         </nav>
-      </header>
+      </header> */}
+      <Header />
       <main className="flex grow flex-col">{children}</main>
       <footer className="border-t">
         <div className="container py-4 text-sm leading-loose">
@@ -66,7 +68,7 @@ function SplashPageNav() {
       >
         Discord
       </Link>
-      <Link href="/product">
+      <Link href="/overview">
         <Button>Get Started</Button>
       </Link>
     </>

@@ -1,4 +1,4 @@
-import { ConvexLogo } from "@/app/(splash)/GetStarted/ConvexLogo";
+import { ConvexLogo } from "./ConvexLogo";
 import { Code } from "@/components/Code";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -24,7 +24,7 @@ export const GetStarted = () => {
         </div>
         <div className="mb-16 flex justify-center gap-4">
           <Button asChild size="lg">
-            <Link href="/product">Get Started</Link>
+            <Link href="/overview">Get Started</Link>
           </Button>
           <Button asChild size="lg" variant="outline">
             <Link href="https://docs.convex.dev/home">Convex docs</Link>
@@ -47,7 +47,7 @@ export const GetStarted = () => {
               <CardContent>
                 Click on{" "}
                 <Link
-                  href="/product"
+                  href="/overview"
                   className="font-medium underline underline-offset-4 hover:no-underline"
                 >
                   Get Started

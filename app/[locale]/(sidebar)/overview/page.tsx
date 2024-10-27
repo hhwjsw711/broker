@@ -1,11 +1,16 @@
-import { Chat } from "@/app/product/Chat/Chat";
-import { ChatIntro } from "@/app/product/Chat/ChatIntro";
+import { Chat } from "./Chat/Chat";
+import { ChatIntro } from "./Chat/ChatIntro";
 import { UserMenu } from "@/components/UserMenu";
 import { api } from "@/convex/_generated/api";
 import { convexAuthNextjsToken } from "@convex-dev/auth/nextjs/server";
 import { fetchQuery } from "convex/nextjs";
+import { Metadata } from "next";
 
-export default async function ProductPage() {
+export const metadata: Metadata = {
+  title: "Overview | Broker",
+};
+
+export default async function OverviewPage() {
   const viewer = await fetchQuery(
     api.users.viewer,
     {},
