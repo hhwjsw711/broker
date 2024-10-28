@@ -10,26 +10,42 @@ import {
 } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { ReactNode } from "react";
+import { Screens } from "./screens";
+import { SectionFour } from "./section-four";
+import { SectionSix } from "./section-six";
 
 export const GetStarted = () => {
   return (
     <div className="flex grow flex-col">
       <div className="container mb-20 flex grow flex-col justify-center">
-        <h1 className="mb-8 mt-16 flex flex-col items-center gap-8 text-center text-6xl font-extrabold leading-none tracking-tight">
-          Your app powered by
+        <h1 className="mb-8 mt-32 flex flex-col items-center gap-8 text-center text-6xl font-extrabold leading-none tracking-tight">
+          Trust in Every Trade
           <ConvexLogo width={377} height={44} />
         </h1>
         <div className="mb-8 text-center text-lg text-muted-foreground">
-          Build a realtime full-stack app in no time.
+          Broker is a platform for Data Trading, IP Protection, and Future
+          Security.
         </div>
-        <div className="mb-16 flex justify-center gap-4">
+        <div className="mb-8 flex justify-center gap-4">
           <Button asChild size="lg">
             <Link href="/overview">Get Started</Link>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <Link href="https://docs.convex.dev/home">Convex docs</Link>
+            <Link href="https://docs.convex.dev/home">Talk to us</Link>
           </Button>
         </div>
+        <div className="mb-8 flex justify-center gap-4">
+          <p className="text-xs text-[#707070] font-mono">
+            Used by over{" "}
+            <Link href="/open-startup" prefetch>
+              <span className="underline">5,200+</span>
+            </Link>{" "}
+            creators.
+          </p>
+        </div>
+        <Screens />
+        <SectionFour />
+        <SectionSix />
         <div className="flex flex-col gap-4 bg-muted/50 p-12 dark:bg-transparent">
           <h2 className="mb-1 text-center text-3xl font-bold md:text-4xl ">
             Next steps
