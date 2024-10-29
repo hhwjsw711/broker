@@ -19,7 +19,7 @@ export function Hero() {
             <Link href="/overview">Get Started</Link>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <Link href="https://docs.convex.dev/home">Talk to us</Link>
+            <Link href="/GetStarted/talk-to-us">Talk to us</Link>
           </Button>
         </div>
         <div className="mb-8 flex justify-center gap-4">

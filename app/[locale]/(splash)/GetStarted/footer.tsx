@@ -87,7 +87,7 @@ export function Footer() {
                   <Link href="/open-startup">Open startup</Link>
                 </li>
                 <li className="transition-colors text-[#878787]">
-                  <Link href="/oss-friends">OSS friends</Link>
+                  <Link href="/GetStarted/oss-friends">OSS friends</Link>
                 </li>
               </ul>
             </div>

@@ -100,7 +100,7 @@ export function Header() {
       ),
       children: [
         {
-          path: "/overview",
+          path: "/GetStarted/overview",
           title: "Overview",
           icon: <MdBarChart size={20} />,
         },

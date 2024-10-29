@@ -18,7 +18,7 @@ export default function SplashPageLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen w-full flex-col">
+    <div className="flex min-h-screen w-full flex-col overflow-x-hidden">
       <Header />
       <main className="flex grow flex-col">{children}</main>
       <Footer />
