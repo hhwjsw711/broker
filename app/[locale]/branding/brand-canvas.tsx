@@ -96,10 +96,16 @@ const DOWNLOADS = {
 
 const repeated = [...assets, ...assets, ...assets, ...assets, ...assets];
 
+type DownloadOption = typeof DOWNLOADS[keyof typeof DOWNLOADS];
+
 export function BrandCanvas() {
-  const [value, setValue] = useState(DOWNLOADS.all);
-  const ref = useRef();
+  const [value, setValue] = useState<DownloadOption>(DOWNLOADS.all);
+  const ref = useRef<HTMLDivElement>(null) as React.MutableRefObject<HTMLDivElement>;
   const { events } = useDraggable(ref);
+
+  const handleValueChange = (newValue: DownloadOption) => {
+    setValue(newValue);
+  };
 
   return (
     <div className="sm:h-screen sm:w-screen overflow-hidden">
@@ -121,7 +127,7 @@ export function BrandCanvas() {
 
       <div className="fixed bottom-10 z-20 w-full flex justify-center items-center">
         <div className="h-[48px] w-[240px] rounded-full border border-border backdrop-filter backdrop-blur-xl bg-[#121212] bg-opacity-70 text-center flex items-center p-1 pl-2 justify-between space-x-4">
-          <Select onValueChange={setValue} value={value}>
+          <Select onValueChange={handleValueChange} value={value}>
             <SelectTrigger className="w-[180px] border-0 space-x-2">
               <SelectValue placeholder="All" className="border-0" />
             </SelectTrigger>
