@@ -18,7 +18,7 @@ export function Sidebar({
 }: Props) {
   const ref = useClickAway(() => {
     setExpanded(false);
-  });
+  }) as React.MutableRefObject<HTMLDivElement>;
 
   return (
     <div className="relative">

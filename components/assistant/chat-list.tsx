@@ -1,7 +1,12 @@
 "use client";
 
+interface ChatMessage {
+  id: string;
+  display?: React.ReactNode;
+}
+
 type Props = {
-  messages: any;
+  messages: ChatMessage[];
 };
 
 export function ChatList({ messages }: Props) {
@@ -12,8 +17,8 @@ export function ChatList({ messages }: Props) {
   return (
     <div className="flex flex-col  p-4 pb-8">
       {messages
-        .filter((tool) => tool.display !== undefined)
-        .map((message, index) => (
+        .filter((tool: ChatMessage) => tool.display !== undefined)
+        .map((message: ChatMessage, index: number) => (
           <div key={message.id}>
             {message.display}
             {index < messages.length - 1 && <div className="my-6" />}

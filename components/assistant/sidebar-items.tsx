@@ -25,65 +25,65 @@ const items = {
   "1d": [
     {
       id: "1",
-      title: chatExamples.at(0).title,
+      title: chatExamples.at(0)?.title || "Default Title 1",
     },
     {
       id: "2",
-      title: chatExamples.at(2).title,
+      title: chatExamples.at(2)?.title || "Default Title 2",
     },
   ],
   "2d": [
     {
       id: "1",
-      title: chatExamples.at(3).title,
+      title: chatExamples.at(3)?.title || "Default Title 3",
     },
     {
       id: "2",
-      title: chatExamples.at(4).title,
+      title: chatExamples.at(4)?.title || "Default Title 4",
     },
   ],
   "7d": [
     {
       id: "1",
-      title: chatExamples.at(5).title,
+      title: chatExamples.at(5)?.title || "Default Title 5",
     },
     {
       id: "2",
-      title: chatExamples.at(6).title,
+      title: chatExamples.at(6)?.title || "Default Title 6",
     },
     {
       id: "3",
-      title: chatExamples.at(0).title,
+      title: chatExamples.at(0)?.title || "Default Title 7",
     },
     {
       id: "4",
-      title: chatExamples.at(2).title,
+      title: chatExamples.at(2)?.title || "Default Title 8",
     },
     {
       id: "5",
-      title: chatExamples.at(3).title,
+      title: chatExamples.at(3)?.title || "Default Title 9",
     },
   ],
   "30d": [
     {
       id: "1",
-      title: chatExamples.at(2).title,
+      title: chatExamples.at(2)?.title || "Default Title 10",
     },
     {
       id: "2",
-      title: chatExamples.at(3).title,
+      title: chatExamples.at(3)?.title || "Default Title 11",
     },
     {
       id: "3",
-      title: chatExamples.at(4).title,
+      title: chatExamples.at(4)?.title || "Default Title 12",
     },
     {
       id: "4",
-      title: chatExamples.at(5).title,
+      title: chatExamples.at(5)?.title || "Default Title 13",
     },
     {
       id: "5",
-      title: chatExamples.at(6).title,
+      title: chatExamples.at(6)?.title || "Default Title 14",
     },
   ],
 };
@@ -101,7 +101,7 @@ export function SidebarItems({ onSelect }: SidebarItemsProps) {
       )}
 
       {Object.keys(items).map((key) => {
-        const section = items[key];
+        const section = items[key as keyof typeof items];
 
         return (
           <div key={key}>

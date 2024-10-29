@@ -7,11 +7,14 @@ import { useEffect, useState } from "react";
 import { ChatAvatar } from "./chat-avatar";
 import { spinner } from "./spinner";
 
-function getRandomDelay(min, max) {
+function getRandomDelay(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-async function concatCharacter(inputString, callback) {
+async function concatCharacter(
+  inputString: string,
+  callback: (result: string) => void,
+) {
   const words = inputString.split(" ");
   let result = "";
   for (let i = 0; i < words.length; i++) {
@@ -60,13 +63,13 @@ export function BotCard({
   showAvatar?: boolean;
   className?: string;
 }) {
-  const [text, setText] = useState();
+  const [text, setText] = useState<string>("");
 
   useEffect(() => {
     concatCharacter(content, (intermediateResult) => {
       setText(intermediateResult);
     });
-  }, []);
+  }, [content]);
 
   return (
     <div className="group relative flex items-start">
@@ -93,7 +96,7 @@ export function SignUpCard({
   showAvatar?: boolean;
   className?: string;
 }) {
-  const [text, setText] = useState();
+  const [text, setText] = useState<string>("");
 
   const content =
     "I'm just a demo assistant. To ask questions about your business, you can sign up and get started in a matter of minutes.";
@@ -102,7 +105,7 @@ export function SignUpCard({
     concatCharacter(content, (intermediateResult) => {
       setText(intermediateResult);
     });
-  }, []);
+  }, [content]);
 
   return (
     <div>

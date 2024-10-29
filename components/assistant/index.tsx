@@ -9,9 +9,15 @@ import { Header } from "./header";
 import { BotCard, UserMessage } from "./messages";
 import { Sidebar } from "./sidebar";
 
+interface Message {
+  id: string;
+  role: "user" | "assistant";
+  display: React.ReactNode;
+}
+
 export function Assistant() {
   const [isExpanded, setExpanded] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
 
   const toggleOpen = () => setExpanded((prev) => !prev);

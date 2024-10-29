@@ -5,7 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
 import { nanoid } from "nanoid";
-import { useState } from "react";
+import { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { ChatEmpty } from "./chat-empty";
 import { ChatExamples } from "./chat-examples";
 import { ChatList } from "./chat-list";
@@ -13,7 +13,27 @@ import { chatExamples } from "./examples";
 import { Footer } from "./footer";
 import { BotCard, SignUpCard, UserMessage } from "./messages";
 
-export function Chat({ messages, submitMessage, input, setInput }) {
+interface Message {
+  id: string;
+  role: "user" | "assistant";
+  display: React.ReactNode;
+}
+
+interface ChatProps {
+  onNewChat: () => void;
+  messages: Message[];
+  submitMessage: Dispatch<SetStateAction<Message[]>>;
+  input: string;
+  setInput: Dispatch<SetStateAction<string>>;
+}
+
+export function Chat({
+  onNewChat,
+  messages,
+  submitMessage,
+  input,
+  setInput,
+}: ChatProps) {
   const { formRef, onKeyDown } = useEnterSubmit();
   const [isVisible, setVisible] = useState(false);
 
@@ -26,8 +46,8 @@ export function Chat({ messages, submitMessage, input, setInput }) {
 
     setInput("");
 
-    submitMessage((message) => [
-      ...message,
+    submitMessage((messages: Message[]) => [
+      ...messages,
       {
         id: nanoid(),
         role: "user",
@@ -42,19 +62,12 @@ export function Chat({ messages, submitMessage, input, setInput }) {
     if (content) {
       setTimeout(
         () =>
-          submitMessage((message) => [
-            ...message,
+          submitMessage((messages: Message[]) => [
+            ...messages,
             {
               id: nanoid(),
               role: "assistant",
-              display: (
-                <BotCard
-                  content={
-                    chatExamples.find((example) => example.title === input)
-                      ?.content
-                  }
-                />
-              ),
+              display: <BotCard content={content} />,
             },
           ]),
         500,
@@ -62,8 +75,8 @@ export function Chat({ messages, submitMessage, input, setInput }) {
     } else {
       setTimeout(
         () =>
-          submitMessage((message) => [
-            ...message,
+          submitMessage((messages: Message[]) => [
+            ...messages,
             {
               id: nanoid(),
               role: "assistant",
@@ -88,7 +101,7 @@ export function Chat({ messages, submitMessage, input, setInput }) {
 
         <form
           ref={formRef}
-          onSubmit={(evt) => {
+          onSubmit={(evt: FormEvent) => {
             evt.preventDefault();
             onSubmit(input);
           }}
