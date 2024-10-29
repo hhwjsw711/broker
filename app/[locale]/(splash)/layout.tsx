@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { Header } from "./GetStarted/header";
 import { Metadata } from "next";
 import { Footer } from "./GetStarted/footer";
+import { FooterCTA } from "./GetStarted/footer-cta";
 
 export const metadata: Metadata = {
   title: {
@@ -18,9 +19,10 @@ export default function SplashPageLayout({
   children: ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen w-full flex-col overflow-x-hidden">
+    <div className="flex min-h-screen w-full flex-col">
       <Header />
-      <main className="flex grow flex-col">{children}</main>
+      <main className="container mx-auto px-4 flex grow flex-col pt-[74px]">{children}</main>
+      <FooterCTA />
       <Footer />
     </div>
   );

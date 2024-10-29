@@ -88,6 +88,22 @@
   scrollbar-width: none;
 }
 
+.animate-header-slide-down-fade {
+  animation: header-slide-down-fade 1s ease-in-out;
+}
+
+@keyframes header-slide-down-fade {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 ::selection {
   background: #00cc9937;
   color: #007763fd;

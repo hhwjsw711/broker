@@ -12,21 +12,18 @@ const I18nMiddleware = createI18nMiddleware({
   urlMappingStrategy: "rewrite",
 });
 
-const isSignInPage = createRouteMatcher(["/:locale/signin"]);
-const isProtectedRoute = createRouteMatcher(["/:locale/overview(.*)"]);
+const isSignInPage = createRouteMatcher(["/signin", "/:locale/signin"]);
+const isProtectedRoute = createRouteMatcher(["/overview(.*)", "/:locale/overview(.*)"]);
 
 export default convexAuthNextjsMiddleware(
   (request: NextRequest, { convexAuth }) => {
     const i18nResponse = I18nMiddleware(request);
-    const nextUrl = request.nextUrl;
-
-    const pathnameLocale = nextUrl.pathname.split("/", 2)?.[1];
 
     if (isSignInPage(request) && convexAuth.isAuthenticated()) {
-      return nextjsMiddlewareRedirect(request, `/${pathnameLocale}/overview`);
+      return nextjsMiddlewareRedirect(request, `/overview`);
     }
     if (isProtectedRoute(request) && !convexAuth.isAuthenticated()) {
-      return nextjsMiddlewareRedirect(request, `/${pathnameLocale}/signin`);
+      return nextjsMiddlewareRedirect(request, `/signin`);
     }
 
     return i18nResponse;

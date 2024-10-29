@@ -105,22 +105,22 @@ export function Header() {
           icon: <MdBarChart size={20} />,
         },
         {
-          path: "/inbox",
+          path: "/GetStarted/inbox",
           title: "Inbox",
           icon: <MdOutlineInbox size={20} />,
         },
         {
-          path: "/vault",
+          path: "/GetStarted/vault",
           title: "Vault",
           icon: <MdOutlineInventory2 size={20} />,
         },
         {
-          path: "/tracker",
+          path: "/GetStarted/tracker",
           title: "Tracker",
           icon: <MdOutlineTimer size={20} />,
         },
         {
-          path: "/invoice",
+          path: "/GetStarted/invoice",
           title: "Invoice",
           icon: <MdOutlineDescription size={20} />,
         },
@@ -128,11 +128,11 @@ export function Header() {
     },
     {
       title: "Pricing",
-      path: "/pricing",
+      path: "/GetStarted/pricing",
     },
     {
       title: "Updates",
-      path: "/updates",
+      path: "/GetStarted/updates",
     },
     {
       title: "Story",
@@ -191,7 +191,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky mt-4 top-4 z-50 px-2 md:px-4 md:flex justify-center",
+        "fixed top-4 left-0 right-0 z-50 px-2 md:px-4 md:flex justify-center",
         pathname === "/" &&
           "transition duration-1s ease-in-out animate-header-slide-down-fade",
       )}
