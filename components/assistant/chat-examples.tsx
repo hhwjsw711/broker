@@ -22,8 +22,12 @@ const itemVariant = {
   show: { y: 0, opacity: 1 },
 };
 
-export function ChatExamples({ onSubmit }) {
-  const ref = useRef();
+interface ChatExamplesProps {
+  onSubmit: (message: string) => void;
+}
+
+export function ChatExamples({ onSubmit }: ChatExamplesProps) {
+  const ref = useRef<HTMLDivElement>(null) as React.MutableRefObject<HTMLDivElement>;
   const { events } = useDraggable(ref);
 
   const totalLength = chatExamples.reduce((accumulator, currentString) => {
