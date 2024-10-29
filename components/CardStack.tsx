@@ -18,26 +18,26 @@ type Card = {
   name: string;
 };
 
-export const CardStack = ({
-  items,
-  offset,
-  scaleFactor,
-}: {
+interface CardStackProps {
   items: Card[];
   offset?: number;
   scaleFactor?: number;
-}) => {
+}
+
+export const CardStack = ({ items, scaleFactor }: CardStackProps) => {
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const CARD_OFFSET = isDesktop ? 10 : 5;
   const SCALE_FACTOR = scaleFactor || 0.06;
-  const [cards, setCards] = useState<Card[]>([items.at(0)]);
+  const [cards, setCards] = useState<Card[]>(
+    items.length > 0 ? [items[0]] : [],
+  );
 
   useEffect(() => {
     startFlipping();
     setCards(items);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [items]);
 
   const startFlipping = () => {
     interval = setInterval(() => {
@@ -49,13 +49,16 @@ export const CardStack = ({
     }, 5000);
   };
 
-  const onChangeCardByIndex = (index) => {
-    const item = cards.at(index);
+  const onChangeCardByIndex = (index: number) => {
+    const item = cards[index];
+    if (!item) return;
     setCards([item, ...cards.slice(0, index), ...cards.slice(index + 1)]);
   };
 
-  const onChangeCard = (item) => {
+  const onChangeCard = (item: Card | undefined) => {
+    if (!item) return;
     const index = cards.findIndex((card) => card.id === item.id);
+    if (index === -1) return;
     setCards([item, ...cards.slice(0, index), ...cards.slice(index + 1)]);
   };
 
@@ -75,7 +78,7 @@ export const CardStack = ({
               display: index > 2 ? "none" : "block",
             }}
             whileHover={{
-              top: index > 0 && index > 0 && index * -CARD_OFFSET - 30,
+              top: index > 0 ? index * -CARD_OFFSET - 30 : index * -CARD_OFFSET,
               transition: { duration: 0.3 },
             }}
             animate={{
