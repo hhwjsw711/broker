@@ -90,5 +90,9 @@
 
 ::selection {
   background: #00cc9937;
-  color: #007763fd
+  color: #007763fd;
+}
+
+img::selection {
+  background: transparent;
 }

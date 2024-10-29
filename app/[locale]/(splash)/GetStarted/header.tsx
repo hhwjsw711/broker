@@ -19,7 +19,6 @@ import {
   MdOutlineDescription,
   MdOutlineInbox,
   MdOutlineInventory2,
-  MdOutlinePalette,
   MdOutlineTimer,
   MdOutlineIntegrationInstructions,
   MdOutlineDashboardCustomize,
@@ -246,15 +245,6 @@ export function Header() {
                   <MdChangeHistory />
                   <span className="font-medium text-sm">Branding</span>
                 </Link>
-              </ContextMenuItem>
-              <ContextMenuItem>
-                <a
-                  href="https://ui.midday.ai"
-                  className="flex items-center space-x-2"
-                >
-                  <MdOutlinePalette />
-                  <span className="font-medium text-sm">Design System</span>
-                </a>
               </ContextMenuItem>
             </div>
           </ContextMenuContent>
