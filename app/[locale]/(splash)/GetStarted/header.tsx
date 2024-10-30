@@ -176,7 +176,7 @@ export function Header() {
           icon: <MdOutlineIntegrationInstructions size={20} />,
         },
         {
-          path: "/components",
+          path: "/GetStarted/components",
           title: "Components",
           icon: <MdOutlineDashboardCustomize size={20} />,
         },
