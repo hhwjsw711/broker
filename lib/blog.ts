@@ -59,15 +59,5 @@ function getMDXData(dir: string): BlogPost[] {
 }
 
 export function getBlogPosts(): BlogPost[] {
-  return getMDXData(
-    path.join(
-      process.cwd(),
-      "app",
-      "[locale]",
-      "(splash)",
-      "GetStarted",
-      "updates",
-      "posts",
-    ),
-  );
+  return getMDXData(path.join(process.cwd(), "public", "updates"));
 }

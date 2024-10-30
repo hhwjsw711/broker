@@ -91,13 +91,6 @@ export function UpdatesToolbar({ posts }: UpdatesToolbarProps) {
         const headerOffset = 80;
         const targetPosition = element.offsetTop - headerOffset;
 
-        console.log("Simple scroll (prev):", {
-          targetSlug: prevPost?.slug,
-          elementOffset: element.offsetTop,
-          headerOffset,
-          targetPosition,
-        });
-
         window.scrollTo({
           top: targetPosition,
           behavior: "smooth",
@@ -118,13 +111,6 @@ export function UpdatesToolbar({ posts }: UpdatesToolbarProps) {
       if (element) {
         const headerOffset = 80;
         const targetPosition = element.offsetTop - headerOffset;
-
-        console.log("Simple scroll (next):", {
-          targetSlug: nextPost?.slug,
-          elementOffset: element.offsetTop,
-          headerOffset,
-          targetPosition,
-        });
 
         window.scrollTo({
           top: targetPosition,

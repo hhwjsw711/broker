@@ -18,12 +18,6 @@ type Props = {
 };
 
 export function Article({ data, firstPost }: Props) {
-  console.log("Article rendered:", {
-    slug: data.slug,
-    isFirstPost: firstPost,
-    title: data.metadata.title,
-  });
-
   return (
     <article
       key={data.slug}
