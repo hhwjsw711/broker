@@ -11,6 +11,7 @@ type Props = {
 
 export function ArticleInView({ slug, firstPost }: Props) {
   const { ref, inView } = useInView();
+
   const pathname = usePathname();
   const fullSlug = `/GetStarted/updates/${slug}`;
 

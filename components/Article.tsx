@@ -18,8 +18,18 @@ type Props = {
 };
 
 export function Article({ data, firstPost }: Props) {
+  console.log("Article rendered:", {
+    slug: data.slug,
+    isFirstPost: firstPost,
+    title: data.metadata.title,
+  });
+
   return (
-    <article key={data.slug} className="pt-28 mb-20 -mt-28" id={data.slug}>
+    <article
+      key={data.slug}
+      className="relative pt-28 mb-20 -mt-28"
+      id={`article-${data.slug}`}  // 添加 'article-' 前缀
+    >
       <ArticleInView slug={data.slug} firstPost={firstPost} />
 
       <PostStatus status={data.metadata.tag} />

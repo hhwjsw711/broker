@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { MdExpandLess, MdExpandMore, MdIosShare } from "react-icons/md";
 import {
   Tooltip,
   TooltipContent,
@@ -19,7 +20,6 @@ import { usePathname } from "next/navigation";
 import { useHotkeys } from "react-hotkeys-hook";
 import { FaXTwitter } from "react-icons/fa6";
 import { CopyInput } from "@/components/CopyInput";
-import { MdExpandLess, MdExpandMore, MdIosShare } from "react-icons/md";
 
 const baseUrl = "https://broker.lszmwh.cn";
 
@@ -84,24 +84,57 @@ export function UpdatesToolbar({ posts }: UpdatesToolbarProps) {
 
   const handlePrev = () => {
     if (currentIndex > 0) {
-      const nextPost = posts[currentIndex - 1];
+      const prevPost = posts[currentIndex - 1];
+      const element = document.getElementById(`article-${prevPost?.slug}`);
 
-      const element = document.getElementById(nextPost?.slug);
-      element?.scrollIntoView({
-        behavior: "smooth",
-      });
+      if (element) {
+        const headerOffset = 80;
+        const targetPosition = element.offsetTop - headerOffset;
+
+        console.log("Simple scroll (prev):", {
+          targetSlug: prevPost?.slug,
+          elementOffset: element.offsetTop,
+          headerOffset,
+          targetPosition,
+        });
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+
+        // 更新 URL
+        const newUrl = `/GetStarted/updates/${prevPost.slug}`;
+        window.history.pushState({}, "", newUrl);
+      }
     }
   };
 
   const handleNext = () => {
     if (currentIndex !== posts.length - 1) {
       const nextPost = posts[currentIndex + 1];
+      const element = document.getElementById(`article-${nextPost?.slug}`);
 
-      const element = document.getElementById(nextPost?.slug);
+      if (element) {
+        const headerOffset = 80;
+        const targetPosition = element.offsetTop - headerOffset;
 
-      element?.scrollIntoView({
-        behavior: "smooth",
-      });
+        console.log("Simple scroll (next):", {
+          targetSlug: nextPost?.slug,
+          elementOffset: element.offsetTop,
+          headerOffset,
+          targetPosition,
+        });
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+
+        // 更新 URL
+        const newUrl = `/GetStarted/updates/${nextPost.slug}`;
+        window.history.pushState({}, "", newUrl);
+      }
     }
   };
 
@@ -125,16 +158,11 @@ export function UpdatesToolbar({ posts }: UpdatesToolbarProps) {
         <TooltipProvider delayDuration={20}>
           <div className="flex flex-col items-center backdrop-filter backdrop-blur-lg bg-[#1A1A1A]/80 p-2 border border-[#2C2C2C] space-y-4 rounded-full">
             <Tooltip>
-              <DialogTrigger asChild>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon" className="h-auto p-0">
-                    <MdIosShare
-                      size={18}
-                      className="text-[#606060] -mt-[1px]"
-                    />
-                  </Button>
-                </TooltipTrigger>
-              </DialogTrigger>
+              <TooltipTrigger>
+                <DialogTrigger asChild>
+                  <MdIosShare size={18} className="text-[#606060] -mt-[1px]" />
+                </DialogTrigger>
+              </TooltipTrigger>
               <TooltipContent
                 className="py-1 px-3 rounded-sm"
                 sideOffset={25}
