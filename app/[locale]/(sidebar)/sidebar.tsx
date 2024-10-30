@@ -4,19 +4,43 @@ import Link from "next/link";
 import { MainMenu } from "@/components/MainMenu";
 import { ConvexLogo } from "../(splash)/GetStarted/ConvexLogo";
 
+// 导入 MenuPath 类型
+type MenuPath = 
+  | "/"
+  | "/transactions"
+  | "/invoices"
+  | "/tracker"
+  | "/vault"
+  | "/settings"
+  | "/apps"
+  | "/inbox";
+
+// 修改 MenuItem 接口，使用 MenuPath 类型
 interface MenuItem {
-  path: string;
+  path: MenuPath;  // 改为 MenuPath 类型
   name: string;
 }
 
 export function Sidebar() {
   const cookieStore = cookies();
   const menuCookie = cookieStore.get(Cookies.MenuConfig);
-  
-  // 使用 ?? undefined 将 null 转换为 undefined
-  const initialItems: MenuItem[] | undefined = menuCookie 
-    ? JSON.parse(menuCookie.value) as MenuItem[]
-    : undefined;  // 改为 undefined
+
+  // 添加类型验证
+  const parsedItems = menuCookie 
+    ? JSON.parse(menuCookie.value) 
+    : undefined;
+
+  // 验证并转换类型
+  const initialItems: MenuItem[] | undefined = parsedItems?.map((item: any) => {
+    if (typeof item.path !== 'string' || !isValidMenuPath(item.path)) {
+      console.warn(`Invalid menu path: ${item.path}`);
+      return null;
+    }
+    return {
+      path: item.path as MenuPath,
+      name: item.name
+    };
+  })?.filter((item: MenuItem | null): item is MenuItem => item !== null);
 
   return (
     <aside className="h-screen flex-shrink-0 flex-col justify-between fixed top-0 ml-4 pb-4 items-center hidden md:flex">
@@ -30,4 +54,19 @@ export function Sidebar() {
       </div>
     </aside>
   );
+}
+
+// 辅助函数：验证是否为有效的 MenuPath
+function isValidMenuPath(path: string): path is MenuPath {
+  const validPaths: MenuPath[] = [
+    "/",
+    "/transactions",
+    "/invoices",
+    "/tracker",
+    "/vault",
+    "/settings",
+    "/apps",
+    "/inbox"
+  ];
+  return validPaths.includes(path as MenuPath);
 }
