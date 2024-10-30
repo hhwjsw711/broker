@@ -20,19 +20,17 @@ export function LanguageSwitcher() {
 
   return (
     <Select value={currentLocale} onValueChange={changeLocale}>
-      <SelectTrigger className="h-6 rounded border-primary/20 bg-secondary !px-2 hover:border-primary/40">
-        <div className="flex items-start gap-2">
-          <span className="text-xs font-medium">
-            {formatLanguage(currentLocale)}
-          </span>
-        </div>
+      <SelectTrigger className="h-7 w-[80px] rounded-md border-input bg-transparent text-sm">
+        <span className="text-xs">
+          {formatLanguage(currentLocale)}
+        </span>
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent align="end">
         {langs.map(({ text, value }) => (
           <SelectItem
             key={value}
             value={value}
-            className="text-sm font-medium text-primary/60"
+            className="text-sm cursor-pointer"
           >
             {text}
           </SelectItem>

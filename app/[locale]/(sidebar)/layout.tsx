@@ -13,14 +13,18 @@ import {
 } from "react-icons/md";
 import Link from "next/link";
 import { ReactNode } from "react";
-import Image from "next/image";
+import { Sidebar } from "./sidebar";
+import { Header } from "./header";
 
 export default function ProductLayout({ children }: { children: ReactNode }) {
   return (
     <ConvexClientProvider>
-      <div className="flex min-h-screen w-full">
-        <ProductMenu />
-        {children}
+      <div className="relative">
+        <Sidebar />
+        <div className="mx-4 md:ml-[95px] md:mr-10 pb-8">
+          <Header />
+          {children}
+        </div>
       </div>
     </ConvexClientProvider>
   );

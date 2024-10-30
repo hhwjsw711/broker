@@ -39,6 +39,20 @@ export default function SignInPage() {
             </Button>
           </>
         )}
+        <div className="mt-4">
+          <p className="text-xs text-[#878787]">
+            By clicking continue, you acknowledge that you have read and agree
+            to Broker&apos;s{" "}
+            <a href="/GetStarted/terms" className="underline">
+              Terms of Service
+            </a>{" "}
+            and{" "}
+            <a href="/GetStarted/policy" className="underline">
+              Privacy Policy
+            </a>
+            .
+          </p>
+        </div>
       </div>
     </div>
   );

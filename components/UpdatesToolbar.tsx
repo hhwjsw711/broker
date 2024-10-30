@@ -161,13 +161,23 @@ export function UpdatesToolbar({ posts }: UpdatesToolbarProps) {
             <div className="flex flex-col items-center border-t-[1px] border-border space-y-2 pt-2">
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <button
-                    type="button"
-                    className={cn(currentIndex === 0 && "opacity-50")}
-                    onClick={handlePrev}
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    className={cn(
+                      "cursor-pointer",
+                      currentIndex === 0 && "opacity-50 cursor-not-allowed",
+                    )}
+                    onClick={currentIndex === 0 ? undefined : handlePrev}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        if (currentIndex !== 0) handlePrev();
+                      }
+                    }}
                   >
                     <MdExpandLess className="h-6 w-6" />
-                  </button>
+                  </div>
                 </TooltipTrigger>
                 <TooltipContent
                   className="py-1 px-3 rounded-sm"
@@ -177,17 +187,29 @@ export function UpdatesToolbar({ posts }: UpdatesToolbarProps) {
                   <span className="text-xs">Previous post</span>
                 </TooltipContent>
               </Tooltip>
+
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <button
-                    type="button"
+                  <div
+                    role="button"
+                    tabIndex={0}
                     className={cn(
-                      currentIndex === posts.length - 1 && "opacity-50",
+                      "cursor-pointer",
+                      currentIndex === posts.length - 1 &&
+                        "opacity-50 cursor-not-allowed",
                     )}
-                    onClick={handleNext}
+                    onClick={
+                      currentIndex === posts.length - 1 ? undefined : handleNext
+                    }
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        if (currentIndex !== posts.length - 1) handleNext();
+                      }
+                    }}
                   >
                     <MdExpandMore className="h-6 w-6" />
-                  </button>
+                  </div>
                 </TooltipTrigger>
                 <TooltipContent
                   className="py-1 px-3 rounded-sm"
@@ -209,7 +231,7 @@ export function UpdatesToolbar({ posts }: UpdatesToolbarProps) {
           </DialogHeader>
 
           <div className="grid gap-6 py-4">
-            <CopyInput value={`${baseUrl}/GetStarted/updates/${pathname}`} />
+            <CopyInput value={`${baseUrl}${pathname}`} />
             <Button
               className="w-full flex items-center space-x-2 h-10"
               onClick={handleOnShare}
