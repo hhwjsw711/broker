@@ -31,18 +31,12 @@ import {
   MdRemove,
 } from "react-icons/md";
 
-type MenuPath =
-  | "/"
-  | "/transactions"
-  | "/invoices"
-  | "/tracker"
-  | "/vault"
-  | "/settings"
-  | "/apps"
-  | "/inbox";
+type MenuItem = {
+  path: string;
+  name: string;
+};
 
-// 使用这个类型来定义 icons
-const icons: Record<MenuPath, () => JSX.Element> = {
+const icons: Record<string, () => JSX.Element> = {
   "/": () => <MdBarChart size={22} />,
   "/transactions": () => <MdOutlineListAlt size={22} />,
   "/invoices": () => <MdOutlineDescription size={22} />,
@@ -53,49 +47,22 @@ const icons: Record<MenuPath, () => JSX.Element> = {
   "/inbox": () => <MdOutlineInbox size={22} />,
 };
 
-const defaultItems: Array<{ path: MenuPath; name: string }> = [
-  {
-    path: "/",
-    name: "Overview",
-  },
-  {
-    path: "/inbox",
-    name: "Inbox",
-  },
-  {
-    path: "/transactions",
-    name: "Transactions",
-  },
-  {
-    path: "/invoices",
-    name: "Invoices",
-  },
-  {
-    path: "/tracker",
-    name: "Tracker",
-  },
-  {
-    path: "/vault",
-    name: "Vault",
-  },
-  {
-    path: "/apps",
-    name: "Apps",
-  },
-  {
-    path: "/settings",
-    name: "Settings",
-  },
+const defaultItems: MenuItem[] = [
+  { path: "/", name: "Overview" },
+  { path: "/inbox", name: "Inbox" },
+  { path: "/transactions", name: "Transactions" },
+  { path: "/invoices", name: "Invoices" },
+  { path: "/tracker", name: "Tracker" },
+  { path: "/vault", name: "Vault" },
+  { path: "/apps", name: "Apps" },
+  { path: "/settings", name: "Settings" },
 ];
 
 interface ItemProps {
-  item: {
-    path: MenuPath; // 使用 MenuPath 类型
-    name: string;
-  };
+  item: MenuItem;
   isActive: boolean;
   isCustomizing: boolean;
-  onRemove: (path: MenuPath) => void; // 更新参数类型
+  onRemove: (path: string) => void;
   disableRemove: boolean;
   onDragEnd: () => void;
   onSelect?: () => void;
@@ -111,7 +78,7 @@ const Item = ({
   onSelect,
 }: ItemProps) => {
   const y = useMotionValue(0);
-  const Icon = icons[item.path as MenuPath];
+  const Icon = icons[item.path];
 
   return (
     <TooltipProvider delayDuration={70}>
@@ -206,16 +173,8 @@ const itemVariant = {
 };
 
 type Props = {
-  initialItems?: Array<{
-    path: MenuPath; // 使用 MenuPath 类型
-    name: string;
-  }>;
+  initialItems?: MenuItem[];
   onSelect?: () => void;
-};
-
-type MenuItem = {
-  path: MenuPath;
-  name: string;
 };
 
 export function MainMenu({ initialItems, onSelect }: Props) {
@@ -257,7 +216,7 @@ export function MainMenu({ initialItems, onSelect }: Props) {
     updateMenuAndCookie(items);
   };
 
-  const onRemove = (path: MenuPath) => {
+  const onRemove = (path: string) => {
     const newItems = items.filter((item) => item.path !== path);
     updateMenuAndCookie(newItems);
   };
